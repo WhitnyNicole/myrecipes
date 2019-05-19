@@ -1,4 +1,6 @@
 class Chef < ApplicationRecord
-  validates :name, :email, presence: true
-  validates :email, uniqueness: true 
+  validates :chefname, :email, presence: true, length: { maximum: 30 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, uniqueness: {case_sensitive: false}, length: { maximum: 250 }, 
+                        format: { with: VALID_EMAIL_REGEX}
 end 
