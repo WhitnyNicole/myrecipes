@@ -1,7 +1,8 @@
 class ChefsController < ApplicationController
   
   
-  def new 
+  def new
+    @chef = Chef.new 
   end 
   
   
