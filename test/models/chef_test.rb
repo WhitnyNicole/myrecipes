@@ -3,7 +3,7 @@ require 'test_helper'
 class ChefTest < ActiveSupport::TestCase
   
   def setup
-    @chef = Chef.new(chefname: "Whitny", email: "whitny@example.com")
+    @chef = Chef.new(chefname: "Whitny", email: "whitny@example.com", password: "password", password_confirmation: "password")
   end 
   
 
@@ -61,5 +61,14 @@ class ChefTest < ActiveSupport::TestCase
     @chef.email = mixed_email
     @chef.save
     assert_equal mixed_email.downcase, @chef.reload.email
+  end 
+  
+  
+  test "associated recipes should be destroyed" do 
+    @chef.save 
+    @chef.recipes.create!(name: "testing destroy", description: "testing destroy function")
+    assert_difference "Recipe.count", -1 do 
+      @chef.destroy
+    end 
   end 
 end
