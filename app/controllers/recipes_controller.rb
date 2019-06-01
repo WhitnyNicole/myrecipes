@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update]
-  
+  before_action :require_user
   def index 
     @recipes = Recipe.paginate(page: params[:page], per_page: 5)
   end 
